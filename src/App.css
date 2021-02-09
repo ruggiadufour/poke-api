@@ -1,38 +1,106 @@
+*{
+ box-sizing: border-box;
+ font-family: 'Open Sans', sans-serif;
+}
 .App {
   text-align: center;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+.container{
+  background-color: lightsteelblue;
   display: flex;
-  flex-direction: column;
+  flex-wrap: wrap;
+  max-width: 900px;
+  min-height: 400px;
+  margin: 15px auto;
   align-items: center;
   justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+  position: relative;
 }
 
-.App-link {
-  color: #61dafb;
+.card{
+  min-width: 8rem;
+  background-color: white;
+  width: 12rem;
+  box-shadow: 5px 5px 5px gray;
+  border-radius: 5px;
+  margin: 0.5rem;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.card:hover{
+  cursor: pointer;
+}
+
+.card img{
+  background-color:rgb(221, 221, 221);
+}
+
+.card h2{
+  margin: 0px;
+  text-transform:capitalize;
+}
+.card p{
+  padding-bottom: 10px;
+  margin: 0px;
+}
+
+
+.input_button{
+  margin: 1rem auto;
+  
+}
+.input_button input, button{
+  height: 2rem;
+}
+
+.imagen{
+  width: 25%;
+  
+}
+
+.datos{
+  width: 75%;
+  
+}
+
+.container_datos{
+  width: 100%;
+  margin: 0.5rem;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: left;
+}
+
+.elemento{
+  width: 40%;
+  margin-left: 25px;
+  text-align: left;
+}
+
+#b1, #b2 {
+  background-color: rgba(255, 255, 255, 0);
+  border-radius: 5px;
+  border: solid 1px rgb(177, 177, 177);
+}
+
+#b1{
+  position: absolute;
+  left: 0;
+  top:0;
+}
+#b2{
+  position: absolute;
+  right: 0;
+  top:0;
+}
+
+.datos_display{
+  display:"inline";
+  text-transform:"capitalize";
+}
+
+button{
+  background-color: rgba(102, 205, 171, 0);
+  border: solid thin gray;
 }
