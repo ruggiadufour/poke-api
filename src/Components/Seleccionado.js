@@ -5,13 +5,7 @@ import {useHistory} from 'react-router-dom'
 
 const Seleccionado = ({pokemons}) => {
   const {indice, setIndice, pokeSeleccionado, setPokeSeleccionado} = useContext(ContextoApp);
-
   const history = useHistory();
-
-  useEffect(()=>{
-    console.log(pokeSeleccionado)
-    console.log(indice)
-  },[])
   
 
   function buscar(cual){
@@ -59,7 +53,7 @@ const Seleccionado = ({pokemons}) => {
             <img src={pokeSeleccionado.sprites.front_default}  alt="pokemon" width="100%"/> 
         </div>
         <div className="datos">
-            <div style={{textAlign:"left"}}>
+            <div style={{textAlign:"left", width:"300px"}}>
                 <h2 style={{textTransform:"capitalize", display:"inline"}} >{`${pokeSeleccionado.name} `}</h2>
                 <p style={{textTransform:"capitalize", display:"inline"}}>#{indice+1}</p>
             </div>
@@ -84,7 +78,7 @@ const Seleccionado = ({pokemons}) => {
                     <p >Abilities</p>
                     {
                         pokeSeleccionado.abilities.map((hab)=>(
-                            <p  key={hab.ability.name}>{hab.ability.name}</p>
+                            <p key={hab.ability.name}>{hab.ability.name}</p>
                         ))
                     }
                 </div>

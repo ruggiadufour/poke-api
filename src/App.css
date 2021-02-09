@@ -4,6 +4,7 @@
 }
 .App {
   text-align: center;
+  margin: 5px;
 }
 
 .container{
@@ -60,20 +61,19 @@
 
 .datos{
   width: 75%;
-  
 }
 
 .container_datos{
   width: 100%;
-  margin: 0.5rem;
+  margin: 0;
   display: flex;
   flex-wrap: wrap;
   align-items: center;
-  justify-content: left;
+  justify-content: stretch;
 }
 
 .elemento{
-  width: 40%;
+  width: 45%;
   margin-left: 25px;
   text-align: left;
 }

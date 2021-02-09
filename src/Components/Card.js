@@ -9,19 +9,15 @@ const Card = ({pokemon, indice, esBusqueda}) => {
   const history = useHistory();
 
   useEffect(async ()=>{
-    console.log(esBusqueda)
     if(!esBusqueda){
       axios(pokemon.url).then((response)=>{
         let data = response.data;
-        console.log(data)
         setDatos(data)
   
       }).catch(error=>{
-        console.log(error)
       })
     }else{
       setDatos(pokemon);
-      console.log(pokemon)
     }
   },[pokemon])
 

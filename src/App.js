@@ -16,13 +16,17 @@ function App() {
   const [esBusqueda, setEsBusqueda] = useState(false)
   const [pokeSeleccionado, setPokeSeleccionado] = useState(null)
   const [indice, setIndice] = useState(null)
-
-  const url =  "https://pokeapi.co/api/v2/pokemon?limit=7" 
+  
+  let cantidad_actual = 10;
+  
+  
   useEffect(async ()=>{
-    obtenerPokemons()
+    obtenerPokemons(10)
   },[])
+  
+  function obtenerPokemons(cantidad){
+    const url =  "https://pokeapi.co/api/v2/pokemon?limit="+cantidad
 
-  function obtenerPokemons(){
     axios(url).then((response)=>{
       let data = response.data.results;
       setPokemons(data)
@@ -39,10 +43,8 @@ function App() {
       setEsBusqueda(true)
       setNoEncontrado("")
       let data = response.data;
-      console.log(data)
       setPokemons([data])
     }).catch(error=>{
-      console.log(error)
       setNoEncontrado("No se ha encontrado a ningún Pokemon con ese nombre")
     })
 
@@ -51,17 +53,18 @@ function App() {
   function volver(){
     setNoEncontrado("")
     setEsBusqueda(false)
-    obtenerPokemons()
+    obtenerPokemons(10)
   }
+
+  function masPokemons(){
+    cantidad_actual+=10;
+    obtenerPokemons(cantidad_actual)
+  }
+
 
   return (
     <div className="App">
       <ContextoApp.Provider value={{pokemons, setPokemons, indice, setIndice, pokeSeleccionado, setPokeSeleccionado}}>
-        <div className="input_button">
-          <input type="text" placeholder="Busca Pokémon" onChange={(e)=>{setNombre(e.target.value)}}/>
-          <button onClick={buscar}>🔎</button>
-        </div>
-
         {
           noEncontrado!=="" && <h2>{noEncontrado}</h2>
         }
@@ -69,6 +72,10 @@ function App() {
         <Router>
           <Switch>
             <Route exact path="/">
+              <div className="input_button">
+                <input type="text" placeholder="Busca Pokémon" onChange={(e)=>{setNombre(e.target.value)}}/>
+                <button onClick={buscar}>🔎</button>
+              </div>
               <div className="container">
               {
                 pokemons.map((pokemon,i)=>
@@ -76,6 +83,7 @@ function App() {
                 )
               }
               </div>
+              {esBusqueda!==true && <button onClick={masPokemons}>Siguiente (+10)</button>}
             </Route>
 
             <Route path="/seleccionado">
@@ -86,6 +94,7 @@ function App() {
         {
           esBusqueda===true && <button onClick={volver}>Volver inicio</button>
         }
+
       </ContextoApp.Provider>
     </div>
   );
