@@ -6,7 +6,7 @@ import { useEffect, useState } from 'react';
 
 import ContextoApp from './Contextos/ContextoApp'
 
-import {BrowserRouter as Router, Route, Switch} from 'react-router-dom'
+import {BrowserRouter as Router, Route, Switch, useHistory} from 'react-router-dom'
 
 import axios from 'axios'
 function App() {
@@ -17,7 +17,7 @@ function App() {
   const [pokeSeleccionado, setPokeSeleccionado] = useState(null)
   const [indice, setIndice] = useState(null)
 
-  const url =  "https://pokeapi.co/api/v2/pokemon?limit=3" 
+  const url =  "https://pokeapi.co/api/v2/pokemon?limit=7" 
   useEffect(async ()=>{
     obtenerPokemons()
   },[])
@@ -34,18 +34,17 @@ function App() {
 
   function buscar(){
     const urlNombre = "https://pokeapi.co/api/v2/pokemon/"+nombre;
-    
-   
-      axios(urlNombre).then((response)=>{
-        setEsBusqueda(true)
-        setNoEncontrado("")
-        let data = response.data;
-        console.log(data)
-        setPokemons([data])
-      }).catch(error=>{
-        console.log(error)
-        setNoEncontrado("No se ha encontrado a ningún Pokemon con ese nombre")
-      })
+
+    axios(urlNombre).then((response)=>{
+      setEsBusqueda(true)
+      setNoEncontrado("")
+      let data = response.data;
+      console.log(data)
+      setPokemons([data])
+    }).catch(error=>{
+      console.log(error)
+      setNoEncontrado("No se ha encontrado a ningún Pokemon con ese nombre")
+    })
 
   }
 
@@ -85,7 +84,7 @@ function App() {
           </Switch>
         </Router>
         {
-          esBusqueda===true && <button onClick={volver}>Volver</button>
+          esBusqueda===true && <button onClick={volver}>Volver inicio</button>
         }
       </ContextoApp.Provider>
     </div>
