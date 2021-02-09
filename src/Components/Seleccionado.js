@@ -12,7 +12,6 @@ const Seleccionado = ({pokemons}) => {
       console.log(cual)
     axios(pokemons[cual].url).then((response)=>{
         let data = response.data;
-        console.log(data)
         setPokeSeleccionado(data)
   
       }).catch(error=>{
@@ -22,7 +21,6 @@ const Seleccionado = ({pokemons}) => {
 
   function siguiente(){
     let i = indice+1;
-    console.log(i)
 
     if(i<pokemons.length){
         buscar(i)
@@ -65,8 +63,8 @@ const Seleccionado = ({pokemons}) => {
                 <div className="elemento">
                     <p>Type</p>
                     {
-                        pokeSeleccionado.types.map((typ)=>(
-                            <span key={typ.name} style={{color:"white",padding:"5px",borderRadius:"5px",backgroundColor:"orange",margin:"5px"}}>{typ.type.name}</span>
+                        pokeSeleccionado.types.map((typ,i)=>(
+                            <span key={i} style={{color:"white",padding:"5px",borderRadius:"5px",backgroundColor:"orange",margin:"5px"}}>{typ.type.name}</span>
                         ))
                     }
                 </div>

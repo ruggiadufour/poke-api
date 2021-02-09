@@ -17,19 +17,19 @@ function App() {
   const [pokeSeleccionado, setPokeSeleccionado] = useState(null)
   const [indice, setIndice] = useState(null)
   
-  let cantidad_actual = 10;
+  const [cantidad_actual, setCantidad_actual] = useState(10)
   
   
   useEffect(async ()=>{
-    obtenerPokemons(10)
+    obtenerPokemons(0)
   },[])
   
   function obtenerPokemons(cantidad){
-    const url =  "https://pokeapi.co/api/v2/pokemon?limit="+cantidad
-
+    const url =  "https://pokeapi.co/api/v2/pokemon?limit=10&offset="+cantidad
+    
     axios(url).then((response)=>{
       let data = response.data.results;
-      setPokemons(data)
+      setPokemons((poke)=> [...poke, ...data])
     }).catch(error=>{
       console.log(error)
     })
@@ -37,7 +37,8 @@ function App() {
 
 
   function buscar(){
-    const urlNombre = "https://pokeapi.co/api/v2/pokemon/"+nombre;
+    const urlNombre = "https://pokeapi.co/api/v2/pokemon/"+nombre.toLowerCase().trim();
+    console.log(urlNombre)
 
     axios(urlNombre).then((response)=>{
       setEsBusqueda(true)
@@ -47,20 +48,19 @@ function App() {
     }).catch(error=>{
       setNoEncontrado("No se ha encontrado a ningún Pokemon con ese nombre")
     })
-
   }
 
   function volver(){
     setNoEncontrado("")
     setEsBusqueda(false)
-    obtenerPokemons(10)
+    setPokemons([])
+    obtenerPokemons(0)
   }
 
   function masPokemons(){
-    cantidad_actual+=10;
-    obtenerPokemons(cantidad_actual)
+    setCantidad_actual(cantidad_actual+10)
+    obtenerPokemons(cantidad_actual+10)
   }
-
 
   return (
     <div className="App">
